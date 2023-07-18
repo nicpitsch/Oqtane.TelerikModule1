@@ -1,0 +1,77 @@
+@using My.Module.TelerikModule1.Services
+@using My.Module.TelerikModule1.Models
+
+@namespace My.Module.TelerikModule1
+@inherits ModuleBase
+@inject ITelerikModule1Service TelerikModule1Service
+@inject NavigationManager NavigationManager
+@inject IStringLocalizer<Index> Localizer
+
+@if (_TelerikModule1s == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ActionLink Action="Add" Security="SecurityAccessLevel.Edit" Text="Add TelerikModule1" ResourceKey="Add" />
+    <br />
+    <br />
+    @if (@_TelerikModule1s.Count != 0)
+    {
+        <Pager Items="@_TelerikModule1s">
+            <Header>
+                <th style="width: 1px;">&nbsp;</th>
+                <th style="width: 1px;">&nbsp;</th>
+                <th>@Localizer["Name"]</th>
+            </Header>
+            <Row>
+                <td><ActionLink Action="Edit" Parameters="@($"id=" + context.TelerikModule1Id.ToString())" ResourceKey="Edit"  /></td>
+                <td><ActionDialog Header="Delete TelerikModule1" Message="Are You Sure You Wish To Delete This TelerikModule1?" Action="Delete" Security="SecurityAccessLevel.Edit" Class="btn btn-danger" OnClick="@(async () => await Delete(context))" ResourceKey="Delete"  /></td>
+                <td>@context.Name</td>
+            </Row>
+        </Pager>
+    }
+    else
+    {
+        <p>@Localizer["Message.DisplayNone"]</p>
+    }
+}
+
+@code {
+    public override List<Resource> Resources => new List<Resource>()
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet, Url = ModulePath() + "Module.css" },
+        new Resource { ResourceType = ResourceType.Script, Url = ModulePath() + "Module.js" }
+    };
+
+    List<TelerikModule1> _TelerikModule1s;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _TelerikModule1s = await TelerikModule1Service.GetTelerikModule1sAsync(ModuleState.ModuleId);
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Loading TelerikModule1 {Error}", ex.Message);
+            AddModuleMessage(Localizer["Message.LoadError"], MessageType.Error);
+        }
+    }
+
+    private async Task Delete(TelerikModule1 TelerikModule1)
+    {
+        try
+        {
+            await TelerikModule1Service.DeleteTelerikModule1Async(TelerikModule1.TelerikModule1Id, ModuleState.ModuleId);
+            await logger.LogInformation("TelerikModule1 Deleted {TelerikModule1}", TelerikModule1);
+            _TelerikModule1s = await TelerikModule1Service.GetTelerikModule1sAsync(ModuleState.ModuleId);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Deleting TelerikModule1 {TelerikModule1} {Error}", TelerikModule1, ex.Message);
+            AddModuleMessage(Localizer["Message.DeleteError"], MessageType.Error);
+        }
+    }
+}

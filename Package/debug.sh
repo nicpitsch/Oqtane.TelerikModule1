@@ -1,0 +1,7 @@
+cp -f "../Client/bin/Debug/net7.0/My.Module.TelerikModule1.Client.Oqtane.dll" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -f "../Client/bin/Debug/net7.0/My.Module.TelerikModule1.Client.Oqtane.pdb" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -f "../Server/bin/Debug/net7.0/My.Module.TelerikModule1.Server.Oqtane.dll" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -f "../Server/bin/Debug/net7.0/My.Module.TelerikModule1.Server.Oqtane.pdb" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -f "../Shared/bin/Debug/net7.0/My.Module.TelerikModule1.Shared.Oqtane.dll" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -f "../Shared/bin/Debug/net7.0/My.Module.TelerikModule1.Shared.Oqtane.pdb" "../../oqtane.framework/Oqtane.Server/bin/Debug/net7.0/"
+cp -rf "../Server/wwwroot/"* "../../oqtane.framework/Oqtane.Server/wwwroot/"

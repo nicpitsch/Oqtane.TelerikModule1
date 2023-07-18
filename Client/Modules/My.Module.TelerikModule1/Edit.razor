@@ -1,0 +1,112 @@
+@using Oqtane.Modules.Controls
+@using My.Module.TelerikModule1.Services
+@using My.Module.TelerikModule1.Models
+
+@namespace My.Module.TelerikModule1
+@inherits ModuleBase
+@inject ITelerikModule1Service TelerikModule1Service
+@inject NavigationManager NavigationManager
+@inject IStringLocalizer<Edit> Localizer
+
+<form @ref="form" class="@(validated ? " was-validated" : "needs-validation" )" novalidate>
+    <div class="container">
+        <div class="row mb-1 align-items-center">
+            <Label Class="col-sm-3" For="name" HelpText="Enter a name" ResourceKey="Name">Name: </Label>
+            <div class="col-sm-9">
+                <input id="name" class="form-control" @bind="@_name" required />
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-success" @onclick="Save">@Localizer["Save"]</button>
+    <NavLink class="btn btn-secondary" href="@NavigateUrl()">@Localizer["Cancel"]</NavLink>
+    <br /><br />
+    @if (PageState.Action == "Edit")
+    {
+    <AuditInfo CreatedBy="@_createdby" CreatedOn="@_createdon" ModifiedBy="@_modifiedby" ModifiedOn="@_modifiedon"></AuditInfo>
+    }
+</form>
+
+@code {
+    public override SecurityAccessLevel SecurityAccessLevel => SecurityAccessLevel.Edit;
+
+    public override string Actions => "Add,Edit";
+
+    public override string Title => "Manage TelerikModule1";
+
+    public override List<Resource> Resources => new List<Resource>()
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet, Url = ModulePath() + "Module.css" }
+    };
+
+    private ElementReference form;
+    private bool validated = false;
+
+    private int _id;
+    private string _name;
+    private string _createdby;
+    private DateTime _createdon;
+    private string _modifiedby;
+    private DateTime _modifiedon;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (PageState.Action == "Edit")
+            {
+                _id = Int32.Parse(PageState.QueryString["id"]);
+                TelerikModule1 TelerikModule1 = await TelerikModule1Service.GetTelerikModule1Async(_id, ModuleState.ModuleId);
+                if (TelerikModule1 != null)
+                {
+                    _name = TelerikModule1.Name;
+                    _createdby = TelerikModule1.CreatedBy;
+                    _createdon = TelerikModule1.CreatedOn;
+                    _modifiedby = TelerikModule1.ModifiedBy;
+                    _modifiedon = TelerikModule1.ModifiedOn;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Loading TelerikModule1 {TelerikModule1Id} {Error}", _id, ex.Message);
+            AddModuleMessage(Localizer["Message.LoadError"], MessageType.Error);
+        }
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            validated = true;
+            var interop = new Oqtane.UI.Interop(JSRuntime);
+            if (await interop.FormValid(form))
+            {
+                if (PageState.Action == "Add")
+                {
+                    TelerikModule1 TelerikModule1 = new TelerikModule1();
+                    TelerikModule1.ModuleId = ModuleState.ModuleId;
+                    TelerikModule1.Name = _name;
+                    TelerikModule1 = await TelerikModule1Service.AddTelerikModule1Async(TelerikModule1);
+                    await logger.LogInformation("TelerikModule1 Added {TelerikModule1}", TelerikModule1);
+                }
+                else
+                {
+                    TelerikModule1 TelerikModule1 = await TelerikModule1Service.GetTelerikModule1Async(_id, ModuleState.ModuleId);
+                    TelerikModule1.Name = _name;
+                    await TelerikModule1Service.UpdateTelerikModule1Async(TelerikModule1);
+                    await logger.LogInformation("TelerikModule1 Updated {TelerikModule1}", TelerikModule1);
+                }
+                NavigationManager.NavigateTo(NavigateUrl());
+            }
+            else
+            {
+                AddModuleMessage(Localizer["Message.SaveValidation"], MessageType.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            await logger.LogError(ex, "Error Saving TelerikModule1 {Error}", ex.Message);
+            AddModuleMessage(Localizer["Message.SaveError"], MessageType.Error);
+        }
+    }
+}
