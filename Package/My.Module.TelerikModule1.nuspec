@@ -28,5 +28,9 @@
     <file src="..\Shared\bin\Release\net7.0\My.Module.TelerikModule1.Shared.Oqtane.pdb" target="lib\net7.0" /> 
     <file src="..\Server\wwwroot\**\*.*" target="wwwroot" /> 
     <file src="icon.png" target="" />
+	<!-- Telerik libraries -->
+	<file src="..\Client\bin\Debug\net7.0\win10-x64\publish\Telerik*.dll" target="lib\net7.0" />
+	<!-- Telerik Blazor static resources (css, js) -->
+	<file src="..\Client\bin\Debug\net7.0\win10-x64\publish\wwwroot\_content\Telerik.UI.for.Blazor\**\*.*" target="wwwroot\Modules\My.Module.TelerikModule1\Telerik.UI.for.Blazor\" />
   </files>
 </package>
