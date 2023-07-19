@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.5" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
