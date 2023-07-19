@@ -8,7 +8,7 @@ How to integrate [*Telerik Blazor UI Components*](https://www.telerik.com/blazor
 
 ## Information, Requirements
 
-This is how I got it running. I'm not an Oqtane developer (but a enthusiastic user) and I'm not related Telerik. I have integrated Telerik Blazor UI and Reporting into a line of business solution using Oqtane (but not yet updated from Blazor 3.x to 4.x).
+This is how I got it running. I'm not an Oqtane developer (but a enthusiastic user) and I'm not related to Telerik. I have integrated Telerik Blazor UI and Reporting into a line of business solution using Oqtane (but not yet updated from Blazor 3.x to 4.x).
 
 * [Oqtane development environment](https://github.com/oqtane/oqtane.framework#getting-started).
 * [A Telerik Blazor UI full or trial license](https://www.telerik.com/blazor-ui).
@@ -17,7 +17,7 @@ This is how I got it running. I'm not an Oqtane developer (but a enthusiastic us
 
 ## Steps
 
-The subsequent steps are reflected this repository commits.
+The subsequent steps/chapters are reflected by this repository commits.
 
 ### Create a Oqtane Module
 
