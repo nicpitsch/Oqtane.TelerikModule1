@@ -30,6 +30,19 @@ else
                 <td>@context.Name</td>
             </Row>
         </Pager>
+
+        <TelerikRootComponent>
+            <TelerikGrid Data="@_TelerikModule1s"
+                         Pageable="true" PageSize="50" Sortable="true"
+                         FilterMode="Telerik.Blazor.GridFilterMode.FilterRow"
+                         Resizable="true" 
+                         Reorderable="true">
+                <GridColumns>
+                    <GridColumn Field="@(nameof(TelerikModule1.Name))" Title="Name" />
+                    <GridColumn Field="@(nameof(TelerikModule1.CreatedBy))" Title="CreatedBy" />
+                </GridColumns>
+            </TelerikGrid>
+        </TelerikRootComponent>
     }
     else
     {
