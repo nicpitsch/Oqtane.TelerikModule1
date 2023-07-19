@@ -2,7 +2,7 @@
 
 ## Purpose
 
-How I got it to integrate [*Telerik Blazor UI Components*](https://www.telerik.com/blazor-ui) into [*Oqtane Application Framework for Blazor*](www.oqtane.org).
+How to integrate [*Telerik Blazor UI Components*](https://www.telerik.com/blazor-ui) into [*Oqtane Application Framework for Blazor*](www.oqtane.org) in my experience.
 
 ![Oqtane Module with Telerik Data Grid component](https://github.com/nicpitsch/Oqtane.TelerikModule1/assets/1652835/7a55889e-2f3f-48ea-acb6-a142e62620ca)
 
