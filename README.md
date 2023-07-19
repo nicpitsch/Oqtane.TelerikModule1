@@ -34,11 +34,15 @@ Based on the [Oqtane CCS & JS resources blog](https://www.oqtane.org/blog/!/61/c
 
 ```cs
 ...
-Resources = new List<Resource>
+public ModuleDefinition ModuleDefinition => new ModuleDefinition
 {
-    new Resource { ResourceType = ResourceType.Stylesheet, Url = "~/Telerik.UI.for.Blazor/css/kendo-theme-default/all.css" },              
-    new Resource { ResourceType = ResourceType.Script, Url = "~/Telerik.UI.for.Blazor/js/telerik-blazor.js", Level = ResourceLevel.Site },
-}
+    ...
+    Resources = new List<Resource>
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet, Url = "~/Telerik.UI.for.Blazor/css/kendo-theme-default/all.css" },              
+        new Resource { ResourceType = ResourceType.Script, Url = "~/Telerik.UI.for.Blazor/js/telerik-blazor.js", Level = ResourceLevel.Site },
+    }
+};
 ...
 ```
 
