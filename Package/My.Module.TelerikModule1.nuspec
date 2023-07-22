@@ -6,7 +6,7 @@
     <authors>My</authors>
     <owners>My</owners>
     <title>TelerikModule1</title>
-    <description></description>
+    <description>My Telerik Module</description>
     <copyright>My</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
